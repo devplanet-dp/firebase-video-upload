@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Firebase vide upload',
+      title: 'Firebase video upload',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
