@@ -1,0 +1,32 @@
+{
+  "files.exclude": {
+    "*.class": "explorerExcludedFiles",
+    "*.log": "explorerExcludedFiles",
+    "*.pyc": "explorerExcludedFiles",
+    "*.swp": "explorerExcludedFiles",
+    ".DS_Store": "explorerExcludedFiles",
+    ".atom/": "explorerExcludedFiles",
+    ".buildlog/": "explorerExcludedFiles",
+    ".history": "explorerExcludedFiles",
+    ".svn/": "explorerExcludedFiles",
+    "*.iml": "explorerExcludedFiles",
+    "*.ipr": "explorerExcludedFiles",
+    "*.iws": "explorerExcludedFiles",
+    ".idea/": "explorerExcludedFiles",
+    "**/doc/api/": "explorerExcludedFiles",
+    "**/ios/Flutter/.last_build_id": "explorerExcludedFiles",
+    ".dart_tool/": "explorerExcludedFiles",
+    ".flutter-plugins": "explorerExcludedFiles",
+    ".flutter-plugins-dependencies": "explorerExcludedFiles",
+    ".packages": "explorerExcludedFiles",
+    ".pub-cache/": "explorerExcludedFiles",
+    ".pub/": "explorerExcludedFiles",
+    "build/": "explorerExcludedFiles",
+    "lib/generated_plugin_registrant.dart": "explorerExcludedFiles",
+    "app.*.symbols": "explorerExcludedFiles",
+    "app.*.map.json": "explorerExcludedFiles",
+    "android/app/debug": "explorerExcludedFiles",
+    "android/app/profile": "explorerExcludedFiles",
+    "android/app/release": "explorerExcludedFiles"
+  }
+}
