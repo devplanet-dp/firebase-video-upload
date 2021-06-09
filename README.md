@@ -5,7 +5,7 @@ You've been spending months into building apps, and finally when come to the dis
 How if you could run a single command that take care of all these.  Imagine how it will save your time and reduce complexity. Yes! you can achieve it with 
 app automation tool called [Fastlane!](https://fastlane.tools). 
 
-In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signining, testing, building and deploying stages for a simple Hello World Application. It's all done on your local environment. 
+In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signining, testing, building and deploying stages for a simple ToDo Application. It's all done on your local environment. 
 
 ## Why Fastlane?
 
@@ -58,9 +58,19 @@ Congratulations!, you're ready to use fastlane in your project.
 
 ## Configuring fastlane with your project
 
-This tutorial uses example app called HelloWorld to show possibilites of fastlane. You need to have a paid Apple Developer account to complete this. Now create a simple app in Xcode. 
+This tutorial uses simple app called ToDo to show possibilites of fastlane. You need to have a paid Apple Developer account to complete this. Now create a simple app in Xcode. 
 
-![Create new HelloWorld app](https://i.imgur.com/7YpfwaZ.png)
+![Create iOS project](https://i.imgur.com/WDB66y6.png)
 
+To initialize fastlane inside the project go to root of the project directory from Terminal and run the following command
+```
+fastlane init
+```
+Then you will see some output like this. 
+
+![Init fastlane](https://i.imgur.com/iNgmcTL.png)
+
+Fastlane will ask to choose a single automated action to implement. But you'll implement multiple automated actions. So just select manual setup by entering **4**. 
+Once selected it will output some guidlines on how to use Fastlane with the project. 
 
 
