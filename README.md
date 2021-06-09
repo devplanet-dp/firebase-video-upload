@@ -70,7 +70,31 @@ Then you will see some output like this.
 
 ![Init fastlane](https://i.imgur.com/iNgmcTL.png)
 
-Fastlane will ask to choose a single automated action to implement. But you'll implement multiple automated actions. So just select manual setup by entering **4**. 
-Once selected it will output some guidlines on how to use Fastlane with the project. 
+Fastlane will ask to choose a single automated action to implement. But you'll implement multiple automated actions on this tutorial. So just select manual setup by entering **4**. 
+Once selected it will output some guidlines on how to use Fastlane with the project.
+
+Go to root directory of the project, you will see **Gemfile** which is added as a project dependency and a fastlane directory containing:
+
+* **Appfile** : file contains bundle identifier and your Apple ID.
+* **Fastfile** : file contains the fastlane.tools configuration and actions. 
+
+## Fastlane lanes
+
+A lane is a workflow of sequential task. Lane has a description and name where you can execute these lanes with the name on command line. In this tutorial you will create lanes for:
+
+1. Creating app in Apple Developer Portal and App Store Connect. 
+2. Automanting screenshots
+3. Testing
+4. Building app
+5. Uploading app to App Store
+6. Releasing
+
+## Creating your app with Fastlane
+
+Before creating the app you need to provide your Apple ID in Appfile insde fastlane. By setting this, fastlane won's ask it repeatedly. If somehow your App Store Connect and Apple Developer portal usernames are differennt, replace the **apple_id** line with:
+```
+apple_dev_portal_id("[[APPLE_DEVELOPER_ACCOUNT_USERNAME]]")
+itunes_connect_id("[[APP_STORE_CONNECT_ACCOUNT_USERNAME]]")
+```
 
 
