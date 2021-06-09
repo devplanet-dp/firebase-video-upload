@@ -42,17 +42,25 @@ Now you're ready to install fastlane. So Run the following command:
 sudo gem install -n /usr/local/bin fastlane --verbose
 ```
 
-You can also install fastlane using brew:
-```
-brew install fastlane
-```
- You can confim the installation by running following command:
+You can also install fastlane using brew. Just run the `brew install fastlane` in your terminal. After running the commands you can see installation progress in Terminal. This could take several minutes. When the intallation completes confim the installation by running following command:
  ```
  fastlane --version
  ```
- 
- After running these commands you can see installation progress in Terminal. This could take several minutes.
- 
- Once the installation is completed, you're ready to use fastlane in your project. 
+It will show you output like this
+```
+ fastlane installation at path:
+/usr/local/Cellar/fastlane/2.185.0/libexec/gems/fastlane-2.185.0/bin/fastlane
+-----------------------------
+[✔] 🚀 
+fastlane 2.185.0
+```
+Congratulations!, you're ready to use fastlane in your project. 
+
+## Configuring fastlane with your project
+
+This tutorial uses example app called HelloWorld to show possibilites of fastlane. You need to have a paid Apple Developer account to complete this. Now create a simple app in Xcode. 
+
+![Create new HelloWorld app](https://i.imgur.com/7YpfwaZ.png)
+
 
 
