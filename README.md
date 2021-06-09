@@ -91,10 +91,33 @@ A lane is a workflow of sequential task. Lane has a description and name where y
 
 ## Creating your app with Fastlane
 
-Before creating the app you need to provide your Apple ID in Appfile insde fastlane. By setting this, fastlane won's ask it repeatedly. If somehow your App Store Connect and Apple Developer portal usernames are differennt, replace the **apple_id** line with:
+Before creating the app you need to provide your Apple ID in Appfile insde fastlane. By setting this, fastlane won's ask it repeatedly. Opend **Appfile** and remove `#` sign against **apple_id** field. You can fill **app_identifier** field once you created the app. If somehow your App Store Connect and Apple Developer portal usernames are differennt, replace the **apple_id** line with:
 ```
 apple_dev_portal_id("[[APPLE_DEVELOPER_ACCOUNT_USERNAME]]")
 itunes_connect_id("[[APP_STORE_CONNECT_ACCOUNT_USERNAME]]")
+```
+---authenticating apple services---
+You can use fastlane CredentialManager to add credentials to the keychain. This will disable asking you credentials everytime. Execute the following command:
+```
+fastlane fastlane-credentials add --username [APPLE_ID]
+Password: *********
+Credential felix@krausefx.com:********* added to keychain.
+```
+
+Then you can move to adding a lane inside **Fastfile**. Open **Fastfile** and then replace it with the content below and save the file. 
+```
+default_platform(:ios)
+
+platform :ios do
+  desc "Create app on Apple Developer and App Store Connect"
+  lane :create_app do
+    produce  
+  end
+end
+```
+You have now created your first **lane**. Now open the Terminal inside your project folder and execute:
+```
+fastlane create_app
 ```
 
 
