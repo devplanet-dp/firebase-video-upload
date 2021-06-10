@@ -224,6 +224,10 @@ Then run **build** in Terminal
 ```
 fastlane build
 ```
+Note that before building the app you need to disable Automatically code siging and select the correct Provisioning profile.
+
+![Manual code sigining](https://i.imgur.com/22bMaPl.png)
+
 Fastlane will ask your keychain password if the specific apple ID is not given access to your certificate before. Once you get the message that build is completed you can find `ipa` file in `fastlabe/builds` directoy. How cool and fast is that right?.
 
 ## Upload to TestFlight with Pilot
