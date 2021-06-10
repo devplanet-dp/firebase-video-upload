@@ -203,12 +203,13 @@ Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/ac
   end
 end
 ```
-If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload specific `ipa` without builidng `ipa` file again.
+If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload `ipa` inside the file path. 
 
 Once fastlane completed the process, please go to App Store connect, you can see the build is availble in TestFlight. 
 
 ![Imgur](https://i.imgur.com/prA5vJ9.png)
 
+You can add new tester to the app using the command `fastlane pilot add email@invite.com -g group-1,group-2`. There are many configurations you can find on [pilot](https://docs.fastlane.tools/actions/pilot).
 
 ## Fastlane deliver
 
