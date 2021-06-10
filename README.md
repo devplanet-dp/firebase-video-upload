@@ -144,12 +144,19 @@ Go to the Apple Developer Portal and App Store connect. Then you see the magic. 
 
 Now you can go ahead and add the bundle ID which you created to **app_identifier** property in **Appfile**.
 
-## Creating deliver
+## Fastlane deliver
 
-As fastlane describes "deliver uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
+As fastlane describes "[deliver](https://docs.fastlane.tools/actions/deliver/) uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
 ```
-bundle exec fastlane deliver
+fastlane deliver
 ```
 
-Once you press `y` after the message `No deliver configuration found in the current directory. Do you want to setup deliver?`, It will ask you `Would you like to use Swift instead of Ruby? (y/n)`. I prefer to go with **Ruby** because **fastlane.swift** is still in beta. So press `n` and proceed with **Ruby**.
+Once you press `y` after the message `No deliver configuration found in the current directory. Do you want to setup deliver?`, It will ask you `Would you like to use Swift instead of Ruby? (y/n)`. I prefer to go with **Ruby** because **fastlane.swift** is still in beta. So press `n` and proceed with **Ruby**. Once the deliverfile generation completed you can find new files created inside fastlane directory of your project. 
+- **metadata**: contains App Store Connect metadata.
+- **screenshot**: contains the app screenshot.
+- **deliverfile**: contains some other metadata required for App Store release.
+
+You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
+
+- 
 
