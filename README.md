@@ -115,9 +115,30 @@ platform :ios do
   end
 end
 ```
-You have now created your first **lane**. Now open the Terminal inside your project folder and execute:
+You have now created your first **lane**. To run the lane open the Terminal inside your project folder and execute:
 ```
 fastlane create_app
 ```
+This command will prompt to enter the App Store connect password. In case you have multiple teams associated with Developer portal you can select desired team. 
+Fastlane supports supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) you may see a message like below:
+```
+Two-factor Authentication (6 digits code) is enabled for account '********@gmail.com'
+More information about Two-factor Authentication: https://support.apple.com/en-us/HT204915
 
+If you're running this in a non-interactive session (e.g. server or CI)
+check out https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification
+
+Please enter the 6 digit code you received at +45 •• •• •• 42:
+```
+ Once all this produce will ask to enter apps's bundle ID. Bundle ID should be a unique one which is not previously used in App Store. 
+ 
+ ![Create bundle id](https://i.imgur.com/byAfTx7.png)
+
+Then fastlane will ask to submit a app name. App name shoudn't be more than 30 characters and need to be unique.
+
+Now you can go to the Apple Developer Portal and App Store connect. Then you see the magic. Your app has been created there. 
+
+![Apple Developer Portal](https://i.imgur.com/0UoM1Zn.png)
+
+![App Store Connect](https://i.imgur.com/1OyhXFh.png)
 
