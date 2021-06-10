@@ -136,9 +136,11 @@ Please enter the 6 digit code you received at +45 •• •• •• 42:
 
 Then fastlane will ask to submit a app name. App name shoudn't be more than 30 characters and need to be unique.
 
-Now you can go to the Apple Developer Portal and App Store connect. Then you see the magic. Your app has been created there. 
+Go to the Apple Developer Portal and App Store connect. Then you see the magic. Your app has been created there. 
 
 ![Apple Developer Portal](https://i.imgur.com/0UoM1Zn.png)
 
 ![App Store Connect](https://i.imgur.com/1OyhXFh.png)
+
+Now you can go ahead and add the bundle ID created to **app_identifier** property in **Appfile**.
 
