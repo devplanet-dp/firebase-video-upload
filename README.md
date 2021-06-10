@@ -194,9 +194,20 @@ Fastlane will ask your keychain password if the specific apple ID is not given a
 
 ## Upload to TestFlight with Pilot
 
-Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/actions/pilot/) to manage your app on TestFlight. Only you need is to add another lane inside **Fastfile**. Open **Fastfile** and add the following lane.
+Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/actions/pilot/) to manage your app on TestFlight. Only you need is to add another lane inside **Fastfile**. As you have already a lane to build `ipa` file, only you need is the **pilot** command to be added to **Fastfile**. 
 
+```desc "Upload to TestFlight"
+  lane :beta do
+    build
+    pilot  
+  end
+end
+```
+If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload specific `ipa` without builidng `ipa` file again.
 
+Once fastlane completed the process, please go to App Store connect, you can see the build is availble in TestFlight. 
+
+![Imgur](https://i.imgur.com/prA5vJ9.png)
 
 
 ## Fastlane deliver
