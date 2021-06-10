@@ -164,9 +164,9 @@ fastlane match appstore
 ```
 Once completed go to Apple Developer portal. You will see profiles are created there:
 
-![match profiles]([Imgur](https://i.imgur.com/zJ3yExb.png)
+![match profiles](https://i.imgur.com/zJ3yExb.png)
 
-As you know the code sigining is managing by the fastlane match, you need to disable the automatic code sigining in XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
+As you know the code sigining is managing by the fastlane match, so you need to disable the automatic code sigining in XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
 ```
 desc "Sync certificates"
   lane :match do
