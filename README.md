@@ -96,7 +96,7 @@ Before creating the app you need to provide your Apple ID in Appfile insde fastl
 apple_dev_portal_id("[[APPLE_DEVELOPER_ACCOUNT_USERNAME]]")
 itunes_connect_id("[[APP_STORE_CONNECT_ACCOUNT_USERNAME]]")
 ```
----authenticating apple services---
+
 You can use fastlane CredentialManager to add credentials to the keychain. This will disable asking you credentials everytime. Execute the following command:
 ```
 fastlane fastlane-credentials add --username [APPLE_ID]
@@ -144,6 +144,37 @@ Go to the Apple Developer Portal and App Store connect. Then you see the magic. 
 
 Now you can go ahead and add the bundle ID which you created to **app_identifier** property in **Appfile**.
 
+## Code signing with match
+
+Fastlane [match](https://docs.fastlane.tools/actions/match/) will give you a smart way of sharing certifcate accros your development team. It will keep all required certificates & provisioning profiles in an encrypted storage. It supports **git repository, Google Cloud, or Amazon S3**.This tutorial use private git repository on Github. 
+
+Open Terminal and execute:
+```
+fastlane match init
+```
+
+this will prompt to select storage type. Select your desired storgae type and enter the URL to the storage. 
+
+![match init](https://i.imgur.com/XhQWoar.png)
+
+match will asks for password for certificate encryption. Once you proceed with a password certificates will be handled by fastlane match. To create profiles for development and App Store you can execute following commands:
+```
+fastlane match development
+fastlane match appstore
+```
+Once completed go to Apple Developer portal. You will see profiles are created there:
+
+![match profiles]([Imgur](https://i.imgur.com/zJ3yExb.png)
+
+As you know the code sigining is managing by the fastlane match, you need to disable the automatic code sigining in XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
+```
+desc "Sync certificates"
+  lane :match do
+    #read-only disable match from overriding the existing certificates.
+    match(readonly: true)
+  end
+```
+
 ## Build IPA file with Gym
 
 Archive and building the is time-consuming. But with fastlane you have [gym](https://docs.fastlane.tools/actions/gym/).It takes care of generaring a signed `ipa` file. 
@@ -155,7 +186,7 @@ Then fastlane will create a **Gymfile** for you. Open the **Gymfile** and add fo
 
 ```
 # App scheme name
-scheme("mZone Poker")
+scheme("ToDo")
 # specify the path to store .ipa file
 output_directory("./fastlane/builds")
 # Excludes bitcode from the build
@@ -173,6 +204,9 @@ Now open the **Fastfile** file and add the below lane to create `ipa`.
 ```
 desc "Create ipa"
   lane :build do
+    #sync certificates
+    match
+    
     # Enables automatic provisioning in Xcode
     enable_automatic_code_signing
 
