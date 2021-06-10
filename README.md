@@ -158,5 +158,8 @@ Once you press `y` after the message `No deliver configuration found in the curr
 
 You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
 
-- 
+## Upload to TestFlight
+
+You know that when uploading a build to the TestFlight always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. It can be done as below:
+![Enable Apple Generic versioning](https://i.imgur.com/8W72mZo.png)
 
