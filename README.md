@@ -144,6 +144,61 @@ Go to the Apple Developer Portal and App Store connect. Then you see the magic. 
 
 Now you can go ahead and add the bundle ID which you created to **app_identifier** property in **Appfile**.
 
+## Build IPA file with Gym
+
+Archive and building the is time-consuming. But with fastlane you have [gym](https://docs.fastlane.tools/actions/gym/).It takes care of generaring a signed `ipa` file. 
+In Terminal execute:
+
+``fastlane gym init``
+
+Then fastlane will create a **Gymfile** for you. Open the **Gymfile** and add following scipt.
+
+```
+# App scheme name
+scheme("mZone Poker")
+# specify the path to store .ipa file
+output_directory("./fastlane/builds")
+# Excludes bitcode from the build
+include_bitcode(false)
+# Excludes symbols from the build.
+include_symbols(false)
+# Allows Xcode to use automatic provisioning.
+export_xcargs("-allowProvisioningUpdates")
+```
+You know that when building the app for release , always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. You can enable it by changing app versioning settings as below:
+![Enable Apple Generic versioning](https://i.imgur.com/8W72mZo.png)
+
+Now open the **Fastfile** file and add the below lane to create `ipa`.
+
+```
+desc "Create ipa"
+  lane :build do
+    # Enables automatic provisioning in Xcode
+    enable_automatic_code_signing
+
+    # Increases the build number by 1
+    increment_build_number
+
+    # Creates a signed file
+    gym
+
+  end
+```
+
+Then run **build** in Terminal
+
+```
+fastlane build
+```
+Fastlane will ask your keychain password if the specific apple ID is not given access to your certificate before. Once you get the message that build is completed you can find `ipa` file in `fastlabe/builds` directoy. How cool and fast is that right?.
+
+## Upload to TestFlight with Pilot
+
+Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/actions/pilot/) to manage your app on TestFlight. Only you need is to add another lane inside **Fastfile**. Open **Fastfile** and add the following lane.
+
+
+
+
 ## Fastlane deliver
 
 As fastlane describes "[deliver](https://docs.fastlane.tools/actions/deliver/) uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
@@ -158,8 +213,4 @@ Once you press `y` after the message `No deliver configuration found in the curr
 
 You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
 
-## Upload to TestFlight
-
-You know that when uploading a build to the TestFlight always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. It can be done as below:
-![Enable Apple Generic versioning](https://i.imgur.com/8W72mZo.png)
 
