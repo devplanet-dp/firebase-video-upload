@@ -345,6 +345,27 @@ Once you press `y` after the message `No deliver configuration found in the curr
 
 You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
 
+Additionally you can provide a app's ratting file. You need to create a JSON file inside metadata directory named **app_store_rating_config.json** containing:
+```
+{
+  "CARTOON_FANTASY_VIOLENCE": 0,
+  "REALISTIC_VIOLENCE": 0,
+  "PROLONGED_GRAPHIC_SADISTIC_REALISTIC_VIOLENCE": 0,
+  "PROFANITY_CRUDE_HUMOR": 0,
+  "MATURE_SUGGESTIVE": 0,
+  "HORROR": 0,
+  "MEDICAL_TREATMENT_INFO": 0,
+  "ALCOHOL_TOBACCO_DRUGS": 0,
+  "GAMBLING": 0,
+  "SEXUAL_CONTENT_NUDITY": 0,
+  "GRAPHIC_SEXUAL_CONTENT_NUDITY": 0,
+  "UNRESTRICTED_WEB_ACCESS": 0,
+  "GAMBLING_CONTESTS": 0
+}
+```
+
+This fil gives apple the information to calculate app's age ratting.
+
 ## Releasing to the App Store Connect
 
 Now you have .ipa file, metadata and screenshots waiting to upload to the App Store Connect. You need to modify **Deliverfile** with content below. 
@@ -368,6 +389,17 @@ submit_for_review(false)
 # 6
 automatic_release(false)
 ```
+You can add this **Fastfile** as lane:
 
+```
+desc "Upload to App Store"
+  lane :upload do
+    deliver
+  end
+ ```
 
+All done! No on Terminal execute:
 
+```
+fastlane uplaod
+```
