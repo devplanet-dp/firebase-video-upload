@@ -83,11 +83,11 @@ Go to root directory of the project, you will see **Gemfile** which is added as 
 A lane is a workflow of sequential task. Lane has a description and name where you can execute these lanes with the name on command line. In this tutorial you will create lanes for:
 
 1. Creating app in Apple Developer Portal and App Store Connect. 
-2. Automanting screenshots
-3. Testing
-4. Building app
-5. Uploading app to App Store
-6. Releasing
+2. Certificate handling
+3. Building app
+4. Uploading app to TestFlight
+5. Automating Screenshots
+6. Releasing app
 
 ## Creating your app with Fastlane
 
