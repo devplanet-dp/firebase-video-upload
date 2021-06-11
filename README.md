@@ -171,9 +171,11 @@ As you know the code sigining is managing by the fastlane match, so you need to 
 desc "Sync certificates"
   lane :sync_profiles do
     #read-only disable match from overriding the existing certificates.
-    match(readonly: true)
+    match({readonly: true,type:"appstore"})
   end
 ```
+You may need to build .ipa for different purposes such as appstore, adhoc, enterprise or development. You need to update provisioning profile type inside Matchfile as requuired.
+
 ## Two-factor authentication with Fastlane
 
 Fastlane currenlty supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for sigining to apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting your [apple account](appleid.apple.com/account/manage)
@@ -209,15 +211,6 @@ include_bitcode(false)
 # Excludes symbols from the build.
 include_symbols(false)
 
-```
-You many need to build .ipa for different purposes such as **appstore, adhoc, enterprise or development**. You need to update provisioning profile type inside **Matchfile** as requuired. Here is example for **appstore** build.
-
-```
-git_url("https://github.com/devplanet-dp/match_todo.git")
-
-storage_mode("git")
-
-type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
 ```
 
 You know that when building the app for release , always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. You can enable it by changing app versioning settings as below:
