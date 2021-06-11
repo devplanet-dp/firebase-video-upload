@@ -265,28 +265,27 @@ When the UI test is ready run the following command:
 ```
 fastlane snapshot init
 ```
-Once comleted you can see the steps to generate screenshot.Go to newly **Snapfile** inside **fastlane** and configure it as your requirenment. 
+Once comleted you can see the steps to generate screenshot.Go to newly **Snapfile** inside **fastlane** and configure it as your requirenment. You can only use list of available simulators in your XCode. 
+
 ```
 # A list of devices you want to take the screenshots from
-# devices([
+ devices([
    "iPhone 8",
    "iPhone 8 Plus",
-   "iPhone SE",
-   "iPhone X",
    "iPad Pro (12.9-inch)",
    "iPad Pro (9.7-inch)",
 #   "Apple TV 1080p"
-# ])
+])
 
-# languages([
+ languages([
    "en-US",
 #   "de-DE",
 #   "it-IT",
 #   ["pt", "pt_BR"] # Portuguese with Brazilian locale
-# ])
+ ])
 
 # The name of the scheme which contains the UI Tests
-# scheme("ToDoUITests")
+scheme("ToDoUITests")
 
 # Where should the resulting screenshots be stored?
  output_directory("./screenshots")
@@ -294,16 +293,33 @@ Once comleted you can see the steps to generate screenshot.Go to newly **Snapfil
 # remove the '#' to clear all previously generated screenshots before creating new ones
  clear_previous_screenshots(true)
 
-# Remove the '#' to set the status bar to 9:41 AM, and show full battery and reception. See also override_status_bar_arguments for custom options.
-# override_status_bar(true)
-
-# Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
-# launch_arguments(["-favColor red"])
-
 ```
 Now open the Xcode and drag and drop **SnapshotHelper.swift** file into your UI test directory. You can choose the options as below:
 
 ![Adding SnapshotHelper file](https://i.imgur.com/Cn4Hyks.png)
+
+Now open your **ToDoUITests.swift** (your app test file), and add `setupSnapshot(app)` before `app.laucch()`. Whenever you need to capture the screen add `snapshot("0screenName")`.
+
+Next you have to add UITest target as a XCode scheme. To do that go **Product>Scheme>Manage Schemes..**. Inside **Manage Schemes** add your UITest target as below. 
+
+![Manage Schemes](https://i.imgur.com/TkiKVBp.png)
+
+Make sure to enable **shared** property. Double tap on UI Test scheme and click **Build** on the scheme editor. Then select **Test** and **Run** options and close the window. 
+
+![Edit UI Test scheme](https://i.imgur.com/jpZKtvc.png)
+
+Now XCode configurations are completed. Now you can move to adding a lane to **Fastfile**. Add following lane. This lane uses **snapshot** to take screenshots as per **Snapfile**'s settings.
+
+```
+desc "Take screenshots"
+  lane :screenshot do
+    snapshot
+  end
+```
+
+Now run the command `fastlane screenshot` command in your Terminal. Once fastlane completes the process an HTML will open automatically with preview of screenshots. How cool is that right?.
+
+![Preview screenshot](https://i.imgur.com/E4u1T1f.png)
 
 ## Fastlane deliver
 
