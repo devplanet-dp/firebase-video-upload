@@ -426,4 +426,10 @@ desc "Create app, screenshot ,build and upload"
 
 Now you can just run `fastlane release_app` and fast lane will take care of everything.
 
+Finally you can check your fastlane setup by running `fastlane` command in your Terminal. You'll see list of available lanes. 
 
+![Fastlane setup](https://i.imgur.com/e47PLzC.png)
+
+## Conclusion
+
+In this tutorial you built a Pipeline for iOS development workflows using **fastlane**. If you are interested in other ways to handle this and get more idea, check out official docs of [Fastlane](https://fastlane.tools)
