@@ -432,4 +432,6 @@ Finally you can check your fastlane setup by running `fastlane` command in your 
 
 ## Conclusion
 
-In this tutorial you built a Pipeline for iOS development workflows using **fastlane**. If you are interested in other ways to handle this and get more idea, check out official docs of [Fastlane](https://fastlane.tools)
+In this tutorial you built a Pipeline for iOS development workflows using **fastlane**. It adds value to your regular iOS development workflow by saving hours of time that you have spended on building, testing and releasing apps. You can make your iOS automation task more advanced and suited for your exact needs when you become comfortable with it. 
+
+If you are interested in other ways to handle this and get more idea, check out [official documentation](https://fastlane.tools). Hopfully you got an idea on how you could automate your next iOS project.
