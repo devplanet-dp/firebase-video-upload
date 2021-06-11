@@ -303,7 +303,7 @@ Once comleted you can see the steps to generate screenshot.Go to newly **Snapfil
 ```
 Now open the Xcode and drag and drop **SnapshotHelper.swift** file into your UI test directory. You can choose the options as below:
 
-![Adding SnapshotHelper file]([Imgur](https://i.imgur.com/Cn4Hyks.png))
+![Adding SnapshotHelper file](https://i.imgur.com/Cn4Hyks.png)
 
 ## Fastlane deliver
 
