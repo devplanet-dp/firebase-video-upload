@@ -174,6 +174,12 @@ desc "Sync certificates"
     match(readonly: true)
   end
 ```
+## Two-factor authentication with Fastlane
+
+Fastlane currenlty supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for sigining to apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting [](appleid.apple.com/account/manage)
+
+![Generate App-Specific]([Imgur](https://i.imgur.com/EB2X3xx.png)
+
 
 ## Build IPA file with Gym
 
@@ -251,7 +257,7 @@ You can add new tester to the app using the command `fastlane pilot add email@in
 
 ## Fastlane deliver
 
-As fastlane describes "[deliver](https://docs.fastlane.tools/actions/deliver/) uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
+As in the fastlane docs "[deliver](https://docs.fastlane.tools/actions/deliver/) uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
 ```
 fastlane deliver
 ```
