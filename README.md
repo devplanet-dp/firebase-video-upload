@@ -257,6 +257,54 @@ Once fastlane completed the process, please go to App Store connect, you can see
 
 You can add new tester to the app using the command `fastlane pilot add email@invite.com -g group-1,group-2`. There are many configurations you can find on [pilot](https://docs.fastlane.tools/actions/pilot).
 
+## Fastlane Screenshots
+
+App Store screenshots takes major part in app release. You can make theme by a tool or take reals screen on running app. This takes lot of efrort when comes to screenshots with different resolutions. How if you can automate it by running a single command. In order to take screenshots you need to have a UI test. To create UI test you can record steps using XCode and it will automatically generates codes in your test method. To learn more, check this [article](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/RecordingUITests.html).
+
+When the UI test is ready run the following command:
+```
+fastlane snapshot init
+```
+Once comleted you can see the steps to generate screenshot.Go to newly **Snapfile** inside **fastlane** and configure it as your requirenment. 
+```
+# A list of devices you want to take the screenshots from
+# devices([
+   "iPhone 8",
+   "iPhone 8 Plus",
+   "iPhone SE",
+   "iPhone X",
+   "iPad Pro (12.9-inch)",
+   "iPad Pro (9.7-inch)",
+#   "Apple TV 1080p"
+# ])
+
+# languages([
+   "en-US",
+#   "de-DE",
+#   "it-IT",
+#   ["pt", "pt_BR"] # Portuguese with Brazilian locale
+# ])
+
+# The name of the scheme which contains the UI Tests
+# scheme("ToDoUITests")
+
+# Where should the resulting screenshots be stored?
+ output_directory("./screenshots")
+
+# remove the '#' to clear all previously generated screenshots before creating new ones
+ clear_previous_screenshots(true)
+
+# Remove the '#' to set the status bar to 9:41 AM, and show full battery and reception. See also override_status_bar_arguments for custom options.
+# override_status_bar(true)
+
+# Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
+# launch_arguments(["-favColor red"])
+
+```
+Now open the Xcode and drag and drop **SnapshotHelper.swift** file into your UI test directory. You can choose the options as below:
+
+![Adding SnapshotHelper file]([Imgur](https://i.imgur.com/Cn4Hyks.png))
+
 ## Fastlane deliver
 
 As in the fastlane docs "[deliver](https://docs.fastlane.tools/actions/deliver/) uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review". Go inside your root directory of the project and enter:
@@ -270,5 +318,7 @@ Once you press `y` after the message `No deliver configuration found in the curr
 - **deliverfile**: contains some other metadata required for App Store release.
 
 You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
+
+
 
 
