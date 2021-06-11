@@ -398,8 +398,32 @@ desc "Upload to App Store"
   end
  ```
 
-All done! No on Terminal execute:
+All done! Now on Terminal execute the command to upload:
 
 ```
 fastlane uplaod
 ```
+
+Fastlane will verifying the upload via the HTML file. If everything looks perfect you can proceed else terminate uploading process and update the deliverfiles.
+
+Once the lane is completed, have a visit to App Store Connect. You can see the build is uploaded and waiting for review.
+
+![App Store Connect](https://i.imgur.com/hvrT4gE.png)
+
+You can also combine all the lanes we created above. So a single command will Create app, take screenshots, build and upload to App Store
+
+Open **Fastfile** and put all the lanes together. 
+
+```
+desc "Create app, screenshot ,build and upload"
+  lane :release_app do
+    create_app
+    build
+    screenshot	
+    deliver
+  end
+```
+
+Now you can just run `fastlane release_app` and fast lane will take care of everything.
+
+
