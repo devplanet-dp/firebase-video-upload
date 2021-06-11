@@ -169,7 +169,7 @@ Once completed go to Apple Developer portal. You will see profiles are created t
 As you know the code sigining is managing by the fastlane match, so you need to disable the automatic code sigining in XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
 ```
 desc "Sync certificates"
-  lane :match do
+  lane :sync_profiles do
     #read-only disable match from overriding the existing certificates.
     match(readonly: true)
   end
@@ -195,15 +195,31 @@ Then fastlane will create a **Gymfile** for you. Open the **Gymfile** and add fo
 ```
 # App scheme name
 scheme("ToDo")
+#provide provisioning profiles to use
+export_options({
+    method: "app-store",
+    provisioningProfiles: { 
+      "com.devplanet.todo" => "match AppStore com.devplanet.todo",
+         }
+})
 # specify the path to store .ipa file
 output_directory("./fastlane/builds")
 # Excludes bitcode from the build
 include_bitcode(false)
 # Excludes symbols from the build.
 include_symbols(false)
-# Allows Xcode to use automatic provisioning.
-export_xcargs("-allowProvisioningUpdates")
+
 ```
+You many need to build .ipa for different purposes such as **appstore, adhoc, enterprise or development**. You need to update provisioning profile type inside **Matchfile** as requuired. Here is example for **appstore** build.
+
+```
+git_url("https://github.com/devplanet-dp/match_todo.git")
+
+storage_mode("git")
+
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+```
+
 You know that when building the app for release , always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. You can enable it by changing app versioning settings as below:
 ![Enable Apple Generic versioning](https://i.imgur.com/8W72mZo.png)
 
@@ -212,18 +228,12 @@ Now open the **Fastfile** file and add the below lane to create `ipa`.
 ```
 desc "Create ipa"
   lane :build do
-    #sync certificates
-    match
-    
-    # Enables automatic provisioning in Xcode
-    enable_automatic_code_signing
-
+    #uddate profiles
+    sync_profiles
     # Increases the build number by 1
     increment_build_number
-
     # Creates a signed file
     gym
-
   end
 ```
 
@@ -232,7 +242,7 @@ Then run **build** in Terminal
 ```
 fastlane build
 ```
-Note that before building the app you need to disable Automatically code siging and select the correct Provisioning profile.
+Note that before building the app you need to disable Automatically code siging and select the correct **Provisioning profile** in XCode.
 
 ![Manual code sigining](https://i.imgur.com/22bMaPl.png)
 
@@ -335,6 +345,29 @@ Once you press `y` after the message `No deliver configuration found in the curr
 
 You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
 
+## Releasing to the App Store Connect
+
+Now you have .ipa file, metadata and screenshots waiting to upload to the App Store Connect. You need to modify **Deliverfile** with content below. 
+
+```
+# indicating it’s a free app.
+price_tier(0)
+# Answer the questions Apple would present to you upon manually submitting for review
+submission_information({
+    export_compliance_encryption_updated: false,
+    export_compliance_uses_encryption: false,
+    content_rights_contains_third_party_content: false,
+    add_id_info_uses_idfa: false
+})
+# 3
+app_rating_config_path("./fastlane/metadata/app_store_rating_config.json")
+# file location
+ipa("./fastlane/builds/ToDo.ipa”)
+# automatically submit the app for review(In my case false)
+submit_for_review(false)
+# 6
+automatic_release(false)
+```
 
 
 
