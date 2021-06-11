@@ -176,9 +176,11 @@ desc "Sync certificates"
 ```
 ## Two-factor authentication with Fastlane
 
-Fastlane currenlty supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for sigining to apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting [](appleid.apple.com/account/manage)
+Fastlane currenlty supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for sigining to apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting your [apple account](appleid.apple.com/account/manage)
 
-![Generate App-Specific]([Imgur](https://i.imgur.com/EB2X3xx.png)
+![Generate App-Specific](https://i.imgur.com/EB2X3xx.png)
+
+But you know that It's painful to deal with 2FA when comes to continuoes delivery. So the fastlane has implemented an authentication usingApp Store Connect API. It is the **recommended** to use API Key  when you are able to. However currently it doesn't support for all of the fastlane actions. Check out [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) for more information
 
 
 ## Build IPA file with Gym
@@ -247,9 +249,9 @@ Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/ac
   end
 end
 ```
-If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload `ipa` inside the file path. 
+Once the process started fastlane may ask for your **App-specific** password. You can generate one as mentioned above in this tutorial and use it in here to complete the operatiosn. If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload `ipa` inside the file path. 
 
-Once fastlane completed the process, please go to App Store connect, you can see the build is availble in TestFlight. 
+Once fastlane completed the process, please go to App Store connect, you can see the build is availble in **TestFlight**. 
 
 ![Imgur](https://i.imgur.com/prA5vJ9.png)
 
