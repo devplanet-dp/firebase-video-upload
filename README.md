@@ -4,7 +4,7 @@ You've been spending months building apps, and finally when it comes to the dist
 
 How if you could run a single command that takes care of all these.  Imagine how it will save your time and reduce complexity. Yes! You can achieve it with an app automation tool called [Fastlane!](https://fastlane.tools). 
 
-In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signing, testing, building and deploying stages for a simple ToDo Application. It's all done in your local environment. 
+In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signing, testing, building and deploying stages for a simple **ToDo** Application. It's all done in your local environment. 
 
 ## Why Fastlane?
 
@@ -12,7 +12,7 @@ iOS developers know the pain that comes with interacting with the App Store and 
 
 ## Setting Up fastlane
 
-There are many ways of installing fastlane. I am using Ruby for the task as fastlane is a collection of **Ruby scripts**. You must have Ruby installed on your machine. You can simply confirm it by opening Terminal and running:
+There are many ways of installing **fastlane**. I am using **Ruby** for the task as fastlane is a collection of **Ruby scripts**. You must have Ruby installed on your machine. You can simply confirm it by opening Terminal and running:
 ```
 ruby -v
 ```
@@ -90,13 +90,13 @@ A lane is a workflow of sequential tasks. Lane has a description and name where 
 
 ## Creating your app with Fastlane
 
-Before creating the app you need to provide your Apple ID in **Appfile** inside fastlane. By setting this, fastlane won's ask it repeatedly. Opend **Appfile** and remove `#` sign against **apple_id** field. You can fill **app_identifier** field once you created the app. If somehow your App Store Connect and Apple Developer portal usernames are different, replace the **apple_id** line with:
+Before creating the app you need to provide your Apple ID in **Appfile** inside fastlane. By setting this, fastlane won's ask it repeatedly. Open **Appfile** and remove `#` sign against **apple_id** field. You can fill **app_identifier** field once you created the app. If somehow your App Store Connect and Apple Developer portal usernames are different, replace the **apple_id** line with:
 ```
 apple_dev_portal_id("[[APPLE_DEVELOPER_ACCOUNT_USERNAME]]")
 itunes_connect_id("[[APP_STORE_CONNECT_ACCOUNT_USERNAME]]")
 ```
 
-You can use fastlane CredentialManager to add credentials to the keychain. This will disable asking for credentials every time. Execute the following command:
+You can use fastlane **CredentialManager** to add credentials to the **keychain**. This will disable asking for credentials every time. Execute the following command:
 ```
 fastlane fastlane-credentials add --username [APPLE_ID]
 Password: *********
@@ -129,7 +129,7 @@ check out https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-veri
 
 Please enter the 6 digit code you received at +45 •• •• •• 42:
 ```
- Once all this completed **fastlane** asks to enter the app's bundle ID. Bundle ID should be a unique one which is not previously used in App Store. 
+ Once all this completed **fastlane** asks to enter the app's **bundle ID**. **Bundle ID** should be a unique one which is not previously used in App Store. 
  
  ![Create bundle id](https://i.imgur.com/byAfTx7.png)
 
@@ -165,7 +165,7 @@ Once completed go to the Apple Developer portal. You will see profiles are creat
 
 ![match profiles](https://i.imgur.com/zJ3yExb.png)
 
-As you know the code signing is managed by the fastlane match, so you need to disable the automatic code signing in the XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
+As you know the code signing is managed by the fastlane match, so you need to disable the **automatic code signing** in the XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
 ```
 desc "Sync certificates"
   lane :sync_profiles do
@@ -173,7 +173,7 @@ desc "Sync certificates"
     match({readonly: true,type:"appstore"})
   end
 ```
-You may need to build .ipa for different purposes such as appstore, adhoc, enterprise or development. You need to update the provisioning profile type inside **match** as required.
+You may need to build .ipa for different purposes such as **appstore, adhoc, enterprise or development**. You need to update the provisioning profile **type** inside **match** as required.
 
 ## Two-factor authentication with Fastlane
 
@@ -181,7 +181,7 @@ Fastlane currently supports [Two-factor authentication for Apple ID](https://sup
 
 ![Generate App-Specific](https://i.imgur.com/EB2X3xx.png)
 
-But you know that It's painful to deal with 2FA when it comes to continuous delivery. So the **fastlane** has introduced an authentication using App Store Connect API. It is the **recommended** to use API Key  when you are able to. However currently it doesn't support all of the fastlane actions. Check more information on [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) for more information
+But you know that It's painful to deal with **2FA** when it comes to continuous delivery. So the **fastlane** has introduced an authentication using **App Store Connect API**. It is the **recommended** to use API Key  when you are able to. However currently it doesn't support all of the fastlane actions. Check more information on [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) for more information
 
 
 ## Build IPA file with Gym
