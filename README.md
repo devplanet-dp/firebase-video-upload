@@ -9,7 +9,7 @@ In this tutorial you will learn how to build a local fastlane pipeline that will
 
 ## Why Fastlane?
 
-Fastlane is an app automation framework ------
+iOS developers know the pain that comes with interacting with the App Store and the Apple developer portal. This is where **Fastlane** comet to action. [Fastlane]('https://docs.fastlane.tools) is an open-source tool suite to automate releases and deployments for your app. It has ability to save your hours of development. **Fastlane** is powered by **Ruby** configuration file called **Fastfile** where you can add lanes to serve differennt purposes. 
 
 ## Setting Up fastlane
 
