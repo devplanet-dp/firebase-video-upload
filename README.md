@@ -1,19 +1,18 @@
 # How to Build the Perfect fastlane Pipeline for iOS
 
-You've been spending months into building apps, and finally when come to the distribution it is not an easy task. Many individual steps need to be performed, capturing screenshots for most of the major screen sizes, configuring your app with Apple Developer and App Store Connect, uploading build and many more. 
+You've been spending months building apps, and finally when it comes to the distribution it is not an easy task. Many individual steps need to be performed, capturing screenshots for most of the major screen sizes, configuring your app with Apple Developer and App Store Connect, uploading builds, testing and many more. 
 
-How if you could run a single command that take care of all these.  Imagine how it will save your time and reduce complexity. Yes! you can achieve it with 
-app automation tool called [Fastlane!](https://fastlane.tools). 
+How if you could run a single command that takes care of all these.  Imagine how it will save your time and reduce complexity. Yes! You can achieve it with an app automation tool called [Fastlane!](https://fastlane.tools). 
 
-In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signining, testing, building and deploying stages for a simple ToDo Application. It's all done on your local environment. 
+In this tutorial you will learn how to build a local fastlane pipeline that will automate and simplify development steps like signing, testing, building and deploying stages for a simple ToDo Application. It's all done in your local environment. 
 
 ## Why Fastlane?
 
-iOS developers know the pain that comes with interacting with the App Store and the Apple developer portal. This is where **Fastlane** comet to action. [Fastlane]('https://docs.fastlane.tools) is an open-source tool suite to automate releases and deployments for your app. It has ability to save your hours of development. **Fastlane** is powered by **Ruby** configuration file called **Fastfile** where you can add lanes to serve differennt purposes. 
+iOS developers know the pain that comes with interacting with the App Store and the Apple developer portal. This is where **Fastlane** comet to action. [Fastlane]('https://docs.fastlane.tools) is an open-source tool suite to automate releases and deployments for your app. It has the ability to save your hours of development. **Fastlane** is powered by **Ruby** configuration file called **Fastfile** where you can add lanes to serve different purposes. 
 
 ## Setting Up fastlane
 
-There are many wauys if installing fastlane. I am using Ruby for the task as fastlane is a collection of **Ruby scripts**. You must have Ruby install in your machine. You can simply confirm it ny opening Terminal and running:
+There are many ways of installing fastlane. I am using Ruby for the task as fastlane is a collection of **Ruby scripts**. You must have Ruby installed on your machine. You can simply confirm it by opening Terminal and running:
 ```
 ruby -v
 ```
@@ -21,7 +20,7 @@ If Ruby is not installed you can do it by [Homebrew](https://brew.sh).
 ```
 /bin/bash -c “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-Just confim the installation by running the command:
+Just confirm the installation by running the command:
 ```
 brew --version
 ```
@@ -42,7 +41,7 @@ Now you're ready to install fastlane. So Run the following command:
 sudo gem install -n /usr/local/bin fastlane --verbose
 ```
 
-You can also install fastlane using brew. Just run the `brew install fastlane` in your terminal. After running the commands you can see installation progress in Terminal. This could take several minutes. When the intallation completes confim the installation by running following command:
+You can also install fastlane using brew. Just run the `brew install fastlane` in your terminal. After running the commands you can see installation progress in Terminal. This could take several minutes. When the installation completes confirm the installation by running following command:
  ```
  fastlane --version
  ```
@@ -58,7 +57,7 @@ Congratulations!, you're ready to use fastlane in your project.
 
 ## Configuring fastlane with your project
 
-This tutorial uses simple app called ToDo to show possibilites of fastlane. You need to have a paid Apple Developer account to complete this. Now create a simple app in Xcode. 
+This tutorial uses a simple app called ToDo to show possibilities of fastlane. You need to have a paid Apple Developer account to complete this. Now create a simple app in Xcode. 
 
 ![Create iOS project](https://i.imgur.com/WDB66y6.png)
 
@@ -70,8 +69,8 @@ Then you will see some output like this.
 
 ![Init fastlane](https://i.imgur.com/iNgmcTL.png)
 
-Fastlane will ask to choose a single automated action to implement. But you'll implement multiple automated actions on this tutorial. So just select manual setup by entering **4**. 
-Once selected it will output some guidlines on how to use Fastlane with the project.
+Fastlane will ask to choose a single automated action to implement. But you'll implement multiple automated actions in this tutorial. So just select manual setup by entering **4**. 
+Once selected it will output some guidelines on how to use Fastlane with the project.
 
 Go to root directory of the project, you will see **Gemfile** which is added as a project dependency and a fastlane directory containing:
 
@@ -80,9 +79,9 @@ Go to root directory of the project, you will see **Gemfile** which is added as 
 
 ## Fastlane lanes
 
-A lane is a workflow of sequential task. Lane has a description and name where you can execute these lanes with the name on command line. In this tutorial you will create lanes for:
+A lane is a workflow of sequential tasks. Lane has a description and name where you can execute these lanes with the name on the command line. In this tutorial you will create lanes for:
 
-1. Creating app in Apple Developer Portal and App Store Connect. 
+1. Creating apps in Apple Developer Portal and App Store Connect. 
 2. Certificate handling
 3. Building app
 4. Uploading app to TestFlight
@@ -91,17 +90,17 @@ A lane is a workflow of sequential task. Lane has a description and name where y
 
 ## Creating your app with Fastlane
 
-Before creating the app you need to provide your Apple ID in Appfile insde fastlane. By setting this, fastlane won's ask it repeatedly. Opend **Appfile** and remove `#` sign against **apple_id** field. You can fill **app_identifier** field once you created the app. If somehow your App Store Connect and Apple Developer portal usernames are differennt, replace the **apple_id** line with:
+Before creating the app you need to provide your Apple ID in **Appfile** inside fastlane. By setting this, fastlane won's ask it repeatedly. Opend **Appfile** and remove `#` sign against **apple_id** field. You can fill **app_identifier** field once you created the app. If somehow your App Store Connect and Apple Developer portal usernames are different, replace the **apple_id** line with:
 ```
 apple_dev_portal_id("[[APPLE_DEVELOPER_ACCOUNT_USERNAME]]")
 itunes_connect_id("[[APP_STORE_CONNECT_ACCOUNT_USERNAME]]")
 ```
 
-You can use fastlane CredentialManager to add credentials to the keychain. This will disable asking you credentials everytime. Execute the following command:
+You can use fastlane CredentialManager to add credentials to the keychain. This will disable asking for credentials every time. Execute the following command:
 ```
 fastlane fastlane-credentials add --username [APPLE_ID]
 Password: *********
-Credential felix@krausefx.com:********* added to keychain.
+Credential felix@krausefx.com:********* added to the keychain.
 ```
 
 Then you can move to adding a lane inside **Fastfile**. Open **Fastfile** and then replace it with the content below and save the file. 
@@ -119,7 +118,7 @@ You have now created your first **lane**. To run the lane open the Terminal insi
 ```
 fastlane create_app
 ```
-This command will prompt to enter the App Store connect password. In case you have multiple teams associated with Developer portal you can select desired team. 
+This command will prompt you to enter the App Store connect password. In case you have multiple teams associated with the Developer portal you can select the desired team. 
 Fastlane supports supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) you may see a message like below:
 ```
 Two-factor Authentication (6 digits code) is enabled for account '********@gmail.com'
@@ -130,11 +129,11 @@ check out https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-veri
 
 Please enter the 6 digit code you received at +45 •• •• •• 42:
 ```
- Once all this produce will ask to enter apps's bundle ID. Bundle ID should be a unique one which is not previously used in App Store. 
+ Once all this completed **fastlane** asks to enter the app's bundle ID. Bundle ID should be a unique one which is not previously used in App Store. 
  
  ![Create bundle id](https://i.imgur.com/byAfTx7.png)
 
-Then fastlane will ask to submit a app name. App name shoudn't be more than 30 characters and need to be unique.
+Then fastlane will ask to submit a app name. App name should not be more than 30 characters and need to be unique.
 
 Go to the Apple Developer Portal and App Store connect. Then you see the magic. Your app has been created there. 
 
@@ -146,27 +145,27 @@ Now you can go ahead and add the bundle ID which you created to **app_identifier
 
 ## Code signing with match
 
-Fastlane [match](https://docs.fastlane.tools/actions/match/) will give you a smart way of sharing certifcate accros your development team. It will keep all required certificates & provisioning profiles in an encrypted storage. It supports **git repository, Google Cloud, or Amazon S3**.This tutorial use private git repository on Github. 
+Fastlane [match](https://docs.fastlane.tools/actions/match/) will give you a smart way of sharing certificates across your development team. It will keep all required certificates & provisioning profiles in an encrypted storage. It supports **git repository, Google Cloud, or Amazon S3**.This tutorial uses a private git repository on Github. 
 
 Open Terminal and execute:
 ```
 fastlane match init
 ```
 
-this will prompt to select storage type. Select your desired storgae type and enter the URL to the storage. 
+this will prompt to select storage type. Select your desired storage type and enter the URL to the storage. 
 
 ![match init](https://i.imgur.com/XhQWoar.png)
 
-match will asks for password for certificate encryption. Once you proceed with a password certificates will be handled by fastlane match. To create profiles for development and App Store you can execute following commands:
+match will ask for password for certificate encryption. Once you proceed with a password, certificates will be handled by fastlane match. To create profiles for development and App Store you can execute following commands:
 ```
 fastlane match development
 fastlane match appstore
 ```
-Once completed go to Apple Developer portal. You will see profiles are created there:
+Once completed go to the Apple Developer portal. You will see profiles are created there:
 
 ![match profiles](https://i.imgur.com/zJ3yExb.png)
 
-As you know the code sigining is managing by the fastlane match, so you need to disable the automatic code sigining in XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
+As you know the code signing is managed by the fastlane match, so you need to disable the automatic code signing in the XCode project. You can also add a lane to sync certificates on the machine. Open **Fastfile** and add following configuration:
 ```
 desc "Sync certificates"
   lane :sync_profiles do
@@ -174,25 +173,25 @@ desc "Sync certificates"
     match({readonly: true,type:"appstore"})
   end
 ```
-You may need to build .ipa for different purposes such as appstore, adhoc, enterprise or development. You need to update provisioning profile type inside Matchfile as requuired.
+You may need to build .ipa for different purposes such as appstore, adhoc, enterprise or development. You need to update the provisioning profile type inside **match** as required.
 
 ## Two-factor authentication with Fastlane
 
-Fastlane currenlty supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for sigining to apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting your [apple account](appleid.apple.com/account/manage)
+Fastlane currently supports [Two-factor authentication for Apple ID](https://support.apple.com/en-us/HT204915) for signing to an apple developer account. But when you need to upload a build to App Store or TestFlight you need to use **App-specific** password. Apple enables you to sign in to your account for third-party apps with your Apple ID using app-specific passwords. You can generate a **App-specific** password by visiting your [apple account](appleid.apple.com/account/manage)
 
 ![Generate App-Specific](https://i.imgur.com/EB2X3xx.png)
 
-But you know that It's painful to deal with 2FA when comes to continuoes delivery. So the fastlane has implemented an authentication usingApp Store Connect API. It is the **recommended** to use API Key  when you are able to. However currently it doesn't support for all of the fastlane actions. Check out [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) for more information
+But you know that It's painful to deal with 2FA when it comes to continuous delivery. So the **fastlane** has introduced an authentication using App Store Connect API. It is the **recommended** to use API Key  when you are able to. However currently it doesn't support all of the fastlane actions. Check more information on [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) for more information
 
 
 ## Build IPA file with Gym
 
-Archive and building the is time-consuming. But with fastlane you have [gym](https://docs.fastlane.tools/actions/gym/).It takes care of generaring a signed `ipa` file. 
+Archiving and building is time-consuming. But with fastlane you have [gym](https://docs.fastlane.tools/actions/gym/).It takes care of generating a signed `ipa` file. 
 In Terminal execute:
 
 ``fastlane gym init``
 
-Then fastlane will create a **Gymfile** for you. Open the **Gymfile** and add following scipt.
+Then fastlane will create a **Gymfile** for you. Open the **Gymfile** and add the following script.
 
 ```
 # App scheme name
@@ -213,7 +212,7 @@ include_symbols(false)
 
 ```
 
-You know that when building the app for release , always you need to increment version number. So to automate versioning you need to enable Apple Generic Versioning in your project. You can enable it by changing app versioning settings as below:
+You know that when building the app for release , you always need to increment the version number. So to automate versioning first you need to enable Apple Generic Versioning in your project. You can enable it by changing app versioning settings as below:
 ![Enable Apple Generic versioning](https://i.imgur.com/8W72mZo.png)
 
 Now open the **Fastfile** file and add the below lane to create `ipa`.
@@ -235,11 +234,11 @@ Then run **build** in Terminal
 ```
 fastlane build
 ```
-Note that before building the app you need to disable Automatically code siging and select the correct **Provisioning profile** in XCode.
+Note that before building the app you need to disable Automatically code signing and select the correct **Provisioning profile** in XCode.
 
 ![Manual code sigining](https://i.imgur.com/22bMaPl.png)
 
-Fastlane will ask your keychain password if the specific apple ID is not given access to your certificate before. Once you get the message that build is completed you can find `ipa` file in `fastlabe/builds` directoy. How cool and fast is that right?.
+Fastlane will ask your keychain password if the specific apple ID is not given access to your certificate before. Once you get the message that the build is completed you can find the `ipa` file in `fastlabe/builds` directory. How cool and fast is that right?.
 
 ## Upload to TestFlight with Pilot
 
@@ -252,23 +251,25 @@ Fastlane supports TestFlight too. It uses [pilot](https://docs.fastlane.tools/ac
   end
 end
 ```
-Once the process started fastlane may ask for your **App-specific** password. You can generate one as mentioned above in this tutorial and use it in here to complete the operatiosn. If you need to upload a specific `ipa` file to testfilght, please remove `build` from lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload `ipa` inside the file path. 
+Once the process started fastlane may ask for your **App-specific** password. You can generate one as mentioned above in this tutorial. You can  use it here to complete the operation. If you need to upload a specific `ipa` file to **Testflight**, please remove `build` from the lane and add `ipa("./fastlane/builds/ToDo.ipa”)`. This will upload `ipa` inside the file path. 
 
-Once fastlane completed the process, please go to App Store connect, you can see the build is availble in **TestFlight**. 
+Once fastlane completed the process, please go to App Store connect, you can see the build is available in **TestFlight**. 
 
 ![Imgur](https://i.imgur.com/prA5vJ9.png)
 
-You can add new tester to the app using the command `fastlane pilot add email@invite.com -g group-1,group-2`. There are many configurations you can find on [pilot](https://docs.fastlane.tools/actions/pilot).
+You can add a new tester to the app using the command `fastlane pilot add email@invite.com -g group-1,group-2`. There are many configurations you can find on [pilot](https://docs.fastlane.tools/actions/pilot).
 
 ## Fastlane Screenshots
 
-App Store screenshots takes major part in app release. You can make theme by a tool or take reals screen on running app. This takes lot of efrort when comes to screenshots with different resolutions. How if you can automate it by running a single command. In order to take screenshots you need to have a UI test. To create UI test you can record steps using XCode and it will automatically generates codes in your test method. To learn more, check this [article](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/RecordingUITests.html).
+App Store screenshots take a major part in app release. You can make a them by a tool or take a real screen on a running app. This takes a lot of effort when it comes to screenshots with different resolutions. How If you can automate it by running a single command?.
+
+ In order to take screenshots you need to have a UI test. To create a UI test you can record steps using XCode and it will automatically generate codes in your test method. To learn more, check this [article](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/RecordingUITests.html).
 
 When the UI test is ready run the following command:
 ```
 fastlane snapshot init
 ```
-Once comleted you can see the steps to generate screenshot.Go to newly **Snapfile** inside **fastlane** and configure it as your requirenment. You can only use list of available simulators in your XCode. 
+Once completed you can see the steps to generate screenshot.Go to newly **Snapfile** inside **fastlane** and configure it as your requirement. You can only use simulators which are available in your XCode. 
 
 ```
 # A list of devices you want to take the screenshots from
@@ -303,7 +304,7 @@ Now open the Xcode and drag and drop **SnapshotHelper.swift** file into your UI 
 
 Now open your **ToDoUITests.swift** (your app test file), and add `setupSnapshot(app)` before `app.laucch()`. Whenever you need to capture the screen add `snapshot("0screenName")`.
 
-Next you have to add UITest target as a XCode scheme. To do that go **Product>Scheme>Manage Schemes..**. Inside **Manage Schemes** add your UITest target as below. 
+Next you have to add a UITest target as a XCode scheme. To do that go **Product>Scheme>Manage Schemes..**. Inside **Manage Schemes** add your UITest target as below. 
 
 ![Manage Schemes](https://i.imgur.com/TkiKVBp.png)
 
@@ -311,7 +312,7 @@ Make sure to enable **shared** property. Double tap on UI Test scheme and click 
 
 ![Edit UI Test scheme](https://i.imgur.com/jpZKtvc.png)
 
-Now XCode configurations are completed. Now you can move to adding a lane to **Fastfile**. Add following lane. This lane uses **snapshot** to take screenshots as per **Snapfile**'s settings.
+Now XCode configurations are completed. Now you can move to adding a lane to **Fastfile**. Add the following lane. This lane uses **snapshot** to take screenshots as per **Snapfile**'s settings.
 
 ```
 desc "Take screenshots"
@@ -331,14 +332,15 @@ As in the fastlane docs "[deliver](https://docs.fastlane.tools/actions/deliver/)
 fastlane deliver
 ```
 
-Once you press `y` after the message `No deliver configuration found in the current directory. Do you want to setup deliver?`, It will ask you `Would you like to use Swift instead of Ruby? (y/n)`. I prefer to go with **Ruby** because **fastlane.swift** is still in beta. So press `n` and proceed with **Ruby**. Once the deliverfile generation completed you can find new files created inside fastlane directory of your project. 
+Once you press `y` after the message `No deliver configuration found in the current directory. Do you want to set up **deliver**?`, It will ask you `Would you like to use Swift instead of Ruby? (y/n)`. I prefer to go with **Ruby** because **fastlane.swift** is still in beta. So press `n` and proceed with **Ruby**. Once the **deliverfile** generation is completed you can find new files created inside fastlane directory of your project. 
+
 - **metadata**: contains App Store Connect metadata.
 - **screenshot**: contains the app screenshot.
 - **deliverfile**: contains some other metadata required for App Store release.
 
-You can easliy understand the metadata text file becuase they are named by App Store seaction names. You can modify these files by adding your app information. fastlane will use them to submit information to App Store. 
+You can easily understand the metadata text file because they are named by App Store section names. You can modify these files by adding your app information. fastlane will use them to submit information to the App Store. 
 
-Additionally you can provide a app's ratting file. You need to create a JSON file inside metadata directory named **app_store_rating_config.json** containing:
+Additionally you can provide an app's rating file. You need to create a JSON file inside metadata directory named **app_store_rating_config.json** containing:
 ```
 {
   "CARTOON_FANTASY_VIOLENCE": 0,
@@ -357,7 +359,7 @@ Additionally you can provide a app's ratting file. You need to create a JSON fil
 }
 ```
 
-This fil gives apple the information to calculate app's age ratting.
+This file gives Apple the information to calculate the app's age rating.
 
 ## Releasing to the App Store Connect
 
@@ -394,10 +396,10 @@ desc "Upload to App Store"
 All done! Now on Terminal execute the command to upload:
 
 ```
-fastlane uplaod
+fastlane upload
 ```
 
-Fastlane will verifying the upload via the HTML file. If everything looks perfect you can proceed else terminate uploading process and update the deliverfiles.
+Fastlane will verify the upload via the HTML file. If everything looks perfect you can proceed else terminate the uploading process and update the **deliverfiles**.
 
 Once the lane is completed, have a visit to App Store Connect. You can see the build is uploaded and waiting for review.
 
@@ -419,7 +421,7 @@ desc "Create app, screenshot ,build and upload"
 
 Now you can just run `fastlane release_app` and fast lane will take care of everything.
 
-Finally you can check your fastlane setup by running `fastlane` command in your Terminal. You'll see list of available lanes. 
+Finally you can check your fastlane setup by running `fastlane` command in your Terminal. You'll see a list of available lanes. 
 
 ![Fastlane setup](https://i.imgur.com/e47PLzC.png)
 
@@ -427,11 +429,6 @@ Finally you can check your fastlane setup by running `fastlane` command in your 
 
 In this tutorial you built a Pipeline for iOS development workflows using **fastlane**. It adds value to your regular iOS development workflow by saving hours of time that you have spended on building, testing and releasing apps. You can make your iOS automation task more advanced and suited for your exact needs when you become comfortable with it. 
 
-If you are interested in other ways to handle this and get more idea, check out [official documentation](https://fastlane.tools). Hopfully you got an idea on how you could automate your next iOS project.
+If you are interested in other ways to handle this and get more ideas, check out [official documentation](https://fastlane.tools). Hopefully you got an idea on how you could automate your next iOS project.
 
-If you are interested in other ways to handle this and get more idea, check out [official documentation](https://fastlane.tools). Hopfully you got an idea on how you could automate your next iOS project.
-
-The [Runway](https://www.runway.team/features) has bring the automation process of mobile app development into a next level. It is designed to work as an integration layer across all the team’s tools.  This bring more value to you rather than seeing all them in Terminal. How if you can shecdule a automate release?. Yes it is achievable with Runway. There are many adavance features with **Runway** where you can thinking to switch with **Fastlane** such as visualizing and sharing the release progress with your team members, scheduling a release, handling App Store Connect and Google Play Console in one place and many more. Every team member can see exactly where they are in the release cycle and what still needs to be done. Finally **Runway** is a tool that worth to try with your mobile development. 
-
-
-
+The [Runway](https://www.runway.team/features) has bring the automation process of mobile app development into a next level. It is designed to work as an integration layer across all the team’s tools.  This bring more value to you rather than seeing all them in Terminal. How if you can schedule an automatic release?. Yes it is achievable with Runway. There are many advanced features with **Runway** where you can thinking to switch from **Fastlane** such as visualizing and sharing the release progress with your team members, scheduling a release, handling App Store Connect and Google Play Console in one place and many more. Every team member can see exactly where they are in the release cycle and what still needs to be done. Finally **Runway** is a tool that is worth trying with your mobile development. 
